@@ -1,4 +1,5 @@
 from collections import namedtuple
+
 from .exceptions import MWSException
 
 Marketplace = namedtuple('Marketplace', ['code', 'id', 'endpoint'])

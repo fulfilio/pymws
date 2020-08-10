@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-"""Tests for `pymws` package."""
-
 from click.testing import CliRunner
 
-from pymws import MWS
-from pymws import cli
+from pymws import MWS, cli
+
+"""Tests for `pymws` package."""
+
+
 
 
 def test_command_line_interface():

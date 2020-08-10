@@ -1,5 +1,6 @@
 """Console script for pymws."""
 import sys
+
 import click
 
 

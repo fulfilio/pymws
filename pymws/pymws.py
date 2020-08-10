@@ -1,11 +1,20 @@
 """Main module."""
 from __future__ import unicode_literals
-from builtins import str as text
 
 import base64
 import hashlib
 import hmac
+from builtins import str as text
 from datetime import date, datetime
+
+import requests
+from lxml import objectify
+
+from .exceptions import MWSError
+from .orders import Orders
+from .products import Products
+from .utils import get_marketplace
+
 try:
     from urllib.parse import urlparse, quote
 except ImportError:
@@ -13,13 +22,7 @@ except ImportError:
     from urlparse import urlparse
     from urllib import quote
 
-from lxml import objectify
-import requests
 
-from .exceptions import MWSError
-from .orders import Orders
-from .products import Products
-from .utils import get_marketplace
 
 
 MWS_SAFE = '-_.~'.encode('utf-8')
