@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from datetime import datetime
+
 from click.testing import CliRunner
 
 from pymws import MWS, cli
@@ -24,7 +26,8 @@ def test_query_string_builder():
     params = {
         'Name': 'ST',
         'City': 'Los Ángeles',
+        'Timestamp': datetime(2020, 1, 1, 10, 30, 30)
     }
     client = MWS('US')
     assert client.build_query_string(params) == \
-        'City=Los%20%C3%81ngeles&Name=ST'
+        'City=Los%20%C3%81ngeles&Name=ST&Timestamp=2020-01-01T10%3A30%3A30'

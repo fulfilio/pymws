@@ -147,7 +147,7 @@ class MWS(object):
                 value = value.isoformat()
 
             if not isinstance(value, text):
-                value = text(value)
+                value = unicode(value)
 
             query.append(
                 '{}={}'.format(
