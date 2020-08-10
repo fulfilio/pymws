@@ -1,4 +1,24 @@
 class Orders(object):
+    """
+    Implements an order API client for Amazon MWS
+
+    .. code-block:: python
+
+        response = client.orders.list_orders(CreatedAfter=start_date)
+        for order in response.Orders.getchildren():
+            print(order.AmazonOrderId)
+
+    for other attributes of the order, refer to the Amazon MWS documentation.
+
+    To fetch the next page of orders:
+
+    .. code-block:: python
+
+        response = client.orders.list_orders(CreatedAfter=start_date)
+        page2 = client.orders.list_orders_by_next_token(
+            response.NextToken
+        )
+    """
     VERSION = '2013-09-01'
     URI = '/Orders/' + VERSION
 
@@ -18,4 +38,63 @@ class Orders(object):
 
         return self.client.get(
             'ListOrders', self.URI, kwargs, self.VERSION
+        )
+
+    def list_orders_by_next_token(self, NextToken):
+        """
+        Returns the next page of orders using the NextToken parameter.
+
+        http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrdersByNextToken.html
+
+        The `NextToken` argument is not very pythonic, but keeps the
+        package user side code consistent with Amazon's documentation
+        and avoids a surprise for the user.
+        """     # noqa: E501
+        return self.client.get(
+            'ListOrdersByNextToken', self.URI,
+            {'NextToken': NextToken}, self.VERSION
+        )
+
+    def get_order(self, AmazonOrderId):
+        """
+        Returns orders based on the AmazonOrderId values that you specify.
+
+        http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_GetOrder.html
+        """     # noqa: E501
+        return self.client.get(
+            'GetOrder', self.URI,
+            {'AmazonOrderId': AmazonOrderId}, self.VERSION
+        )
+
+    def list_order_items(self, AmazonOrderId):
+        """
+        Returns order items based on the AmazonOrderId that you specify.
+
+        http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrderItems.html
+        """     # noqa: E501
+        return self.client.get(
+            'ListOrderItems', self.URI,
+            {'AmazonOrderId': AmazonOrderId}, self.VERSION
+        )
+
+    def list_order_items_by_next_token(self, NextToken):
+        """
+        Returns the next page of order items using the NextToken parameter.
+
+        http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrderItemsByNextToken.html
+        """     # noqa: E501
+        return self.client.get(
+            'ListOrderItemsByNextToken', self.URI,
+            {'NextToken': NextToken}, self.VERSION
+        )
+
+    def get_service_status(self):
+        """
+        Returns the operational status of the Orders API section.
+
+        http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/MWS_GetServiceStatus.html
+        """     # noqa: E501
+        return self.client.get(
+            'GetServiceStatus', self.URI,
+            {}, self.VERSION
         )

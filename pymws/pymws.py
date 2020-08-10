@@ -90,7 +90,10 @@ class MWS(object):
             headers={'User-Agent': self.user_agent}
         )
         xml = objectify.fromstring(response.content)
-        if response.status_code == requests.codes.ok:
+        if response.status_code == 200:
+            result_el = '{}Result'.format(action)
+            if hasattr(xml, result_el):
+                return getattr(xml, result_el)
             return xml
         else:
             raise MWSError(response.text)

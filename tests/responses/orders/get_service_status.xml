@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<GetServiceStatusResponse xmlns="https://mws.amazonservices.com/Orders/2013-09-01">
+  <GetServiceStatusResult>
+    <Status>GREEN</Status>
+    <Timestamp>2020-08-10T17:45:34.623Z</Timestamp>
+  </GetServiceStatusResult>
+  <ResponseMetadata>
+    <RequestId>9e265b10-dafc-462c-85ce-de63f36d1e1b</RequestId>
+  </ResponseMetadata>
+</GetServiceStatusResponse>
