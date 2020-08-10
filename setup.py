@@ -14,6 +14,7 @@ requirements = [
     'Click>=7.0',
     'lxml',
     'requests',
+    'future',
 ]
 
 setup_requirements = ['pytest-runner', ]
