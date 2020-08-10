@@ -22,6 +22,9 @@ from .products import Products
 from .utils import get_marketplace
 
 
+MWS_SAFE = '-_.~'.encode('utf-8')
+
+
 class MWS(object):
     """
     Primary client class that acts as a gateway to all of the
@@ -139,10 +142,13 @@ class MWS(object):
             if isinstance(value, (date, datetime)):
                 value = value.isoformat()
 
+            if not isinstance(value, text):
+                value = text(value)
+
             query.append(
                 '{}={}'.format(
-                    quote(key, safe='-_.~'),
-                    quote(text(value).encode('utf-8'), safe='-_.~')
+                    quote(key, safe=MWS_SAFE),
+                    quote(value.encode('utf-8'), safe=MWS_SAFE)
                 )
             )
         return '&'.join(query)
