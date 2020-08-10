@@ -23,7 +23,7 @@ test_requirements = ['pytest>=3', ]
 setup(
     author="Fulfil.IO Inc.",
     author_email='help@fulfil.io',
-    python_requires='>=3.5',
+    python_requires='>=2.7',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
@@ -34,6 +34,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 2.7',
     ],
     description="Python client for Amazon Marketplace Web Services (MWS)",
     entry_points={
