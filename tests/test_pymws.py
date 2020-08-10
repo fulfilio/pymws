@@ -9,8 +9,6 @@ from pymws import MWS, cli
 """Tests for `pymws` package."""
 
 
-
-
 def test_command_line_interface():
     """Test the CLI."""
     runner = CliRunner()

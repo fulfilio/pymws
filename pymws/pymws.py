@@ -23,8 +23,6 @@ except ImportError:
     from urllib import quote
 
 
-
-
 MWS_SAFE = '-_.~'.encode('utf-8')
 
 
