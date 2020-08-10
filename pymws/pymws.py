@@ -7,11 +7,11 @@ import hashlib
 import hmac
 from datetime import date, datetime
 try:
-    from urllib.parse import urlparse, urlencode, quote
+    from urllib.parse import urlparse, quote
 except ImportError:
     # py2
     from urlparse import urlparse
-    from urllib import urlencode, quote
+    from urllib import quote
 
 from lxml import objectify
 import requests
@@ -30,10 +30,11 @@ class MWS(object):
     :param marketplace: marketplace to connect to
     """
 
-    def __init__(self, 
-            marketplace, merchant_id=None,
-            access_key_id=None, secret_key=None,
-            auth_token=None):
+    def __init__(
+                self,
+                marketplace, merchant_id=None,
+                access_key_id=None, secret_key=None,
+                auth_token=None):
         self.marketplace = get_marketplace(marketplace)
         self.merchant_id = merchant_id
         self.access_key_id = access_key_id
@@ -89,7 +90,6 @@ class MWS(object):
             return xml
         else:
             raise MWSError(response.text)
-        
 
     def get_query_string(self, action, req_params, version):
         params = {
@@ -105,7 +105,7 @@ class MWS(object):
         params.update(req_params)
         query_string = self.build_query_string(params)
         return query_string
-    
+
     def get_signature(self, http_verb, uri, query_string):
         to_sign = [
             http_verb,
@@ -135,10 +135,10 @@ class MWS(object):
         query = []
         for key in sorted(params.keys()):
             value = params[key]
-            
+
             if isinstance(value, (date, datetime)):
                 value = value.isoformat()
-            
+
             query.append(
                 '{}={}'.format(
                     quote(key, safe='-_.~'),

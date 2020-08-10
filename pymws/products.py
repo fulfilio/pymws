@@ -9,4 +9,5 @@ class Products(object):
         search query.
 
         Learn more: http://docs.developer.amazonservices.com/en_US/products/Products_ListMatchingProducts.html
-        """
+        """  # noqa: E501
+        pass

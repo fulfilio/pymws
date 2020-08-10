@@ -2,6 +2,7 @@
 All errors and exceptions
 """
 
+
 class MWSException(Exception):
     """
     Parent class of all exceptions this package handles
@@ -21,5 +22,5 @@ class AccessDenied(MWSError):
 
 
 class SignatureDoesNotMatch(MWSError):
-    """The signature used does not match the server's 
+    """The signature used does not match the server's
     calculated signature value."""
