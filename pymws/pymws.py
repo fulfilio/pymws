@@ -14,6 +14,7 @@ from .exceptions import MWSError, AccessDenied
 from .orders import Orders
 from .products import Products
 from .reports import Reports
+from .fulfillment.outbound_shipment import OutboundShipment
 from .utils import get_marketplace, parse_tsv
 
 try:
@@ -59,6 +60,10 @@ class MWS(object):
     @property
     def reports(self):
         return Reports(self)
+
+    @property
+    def fulfillment_outbound_shipment(self):
+        return OutboundShipment(self)
 
     def get(self, action, uri, req_params, version):
         return self._request(
