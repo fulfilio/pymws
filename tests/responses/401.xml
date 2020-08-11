@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ErrorResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
+  <Error>
+    <Type>Sender</Type>
+    <Code>AccessDenied</Code>
+    <Message>AuthToken is not valid for SellerId and AWSAccountId.</Message>
+  </Error>
+  <RequestID>312afdab-7ab7-4ee3-b7e2-7f67ff36ba3c</RequestID>
+</ErrorResponse>

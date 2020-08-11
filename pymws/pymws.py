@@ -10,7 +10,7 @@ from datetime import date, datetime
 import requests
 from lxml import objectify
 
-from .exceptions import MWSError
+from .exceptions import MWSError, AccessDenied
 from .orders import Orders
 from .products import Products
 from .reports import Reports
@@ -92,7 +92,9 @@ class MWS(object):
             headers={'User-Agent': self.user_agent}
         )
 
-        if response.status_code != 200:
+        if response.status_code == 401:
+            raise AccessDenied(response.text)
+        elif response.status_code != 200:
             raise MWSError(response.text)
 
         if response.headers['content-type'].startswith('text/xml'):

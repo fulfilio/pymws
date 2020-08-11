@@ -5,8 +5,10 @@ from __future__ import unicode_literals
 from datetime import datetime
 
 from click.testing import CliRunner
+import pytest
 
 from pymws import MWS, cli
+from pymws.exceptions import AccessDenied
 from pymws.utils import flatten_list
 
 
@@ -49,3 +51,15 @@ def test_list_flattening():
         'Type'
     )
     assert not kwargs
+
+
+def test_get_service_status(mws_client, mock_adapter, example_response):
+    mock_adapter.register_uri(
+        'GET',
+        mws_client.marketplace.endpoint + '/Orders/2013-09-01',
+        status_code=401,
+        text=example_response('401.xml'),
+        headers={'Content-Type': 'text/xml'}
+    )
+    with pytest.raises(AccessDenied):
+        mws_client.orders.get_service_status()
