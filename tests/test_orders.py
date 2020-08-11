@@ -6,7 +6,8 @@ def test_list_orders(mws_client, mock_adapter, example_response):
         'GET',
         mws_client.marketplace.endpoint + '/Orders/2013-09-01',
         status_code=200,
-        text=example_response('orders/list_orders.xml')
+        text=example_response('orders/list_orders.xml'),
+        headers={'Content-Type': 'text/xml'}
     )
     response = mws_client.orders.list_orders()
     assert len(response.Orders.getchildren()) == 3
@@ -19,7 +20,8 @@ def test_list_orders_by_next_token(mws_client, mock_adapter, example_response):
         'GET',
         mws_client.marketplace.endpoint + '/Orders/2013-09-01',
         status_code=200,
-        text=example_response('orders/list_orders_by_next_token.xml')
+        text=example_response('orders/list_orders_by_next_token.xml'),
+        headers={'Content-Type': 'text/xml'}
     )
     response = mws_client.orders.list_orders_by_next_token('TOKEN')
     assert len(response.Orders.getchildren()) == 2
@@ -32,7 +34,8 @@ def test_list_order_items(mws_client, mock_adapter, example_response):
         'GET',
         mws_client.marketplace.endpoint + '/Orders/2013-09-01',
         status_code=200,
-        text=example_response('orders/list_order_items.xml')
+        text=example_response('orders/list_order_items.xml'),
+        headers={'Content-Type': 'text/xml'}
     )
     response = mws_client.orders.list_order_items('111-1234567-0000001')
     assert len(response.OrderItems.getchildren()) == 1
@@ -47,7 +50,8 @@ def test_get_service_status(mws_client, mock_adapter, example_response):
         'GET',
         mws_client.marketplace.endpoint + '/Orders/2013-09-01',
         status_code=200,
-        text=example_response('orders/get_service_status.xml')
+        text=example_response('orders/get_service_status.xml'),
+        headers={'Content-Type': 'text/xml'}
     )
     response = mws_client.orders.get_service_status()
     assert response.Status == 'GREEN'

@@ -71,15 +71,12 @@ class MWS(object):
         """
         Build a request, parse the response and handle errors
         """
-        print(req_params)
         query_string = self.get_query_string(action, req_params, version)
-        print(query_string)
         signature = self.get_signature(http_verb, uri, query_string)
         url = "{endpoint}{uri}".format(
             endpoint=self.marketplace.endpoint,
             uri=uri,
         )
-        print(url)
         response = self.session.request(
             http_verb,
             url,
