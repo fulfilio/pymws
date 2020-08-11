@@ -11,35 +11,73 @@ else:
     import csv
 
 
-Marketplace = namedtuple('Marketplace', ['code', 'id', 'endpoint', 'name'])
+Marketplace = namedtuple(
+    'Marketplace', ['code', 'currency', 'id', 'endpoint', 'name']
+)
 
 # Updated from
 # http://docs.developer.amazonservices.com/en_US/dev_guide/DG_Endpoints.html
 MARKETPLACES = [
 
     # North america region
-    Marketplace('BR', 'A2Q3Y263D00KWC', 'https://mws.amazonservices.com', 'Brazil'),
-    Marketplace('CA', 'A2EUQ1WTGCTBG2', 'https://mws.amazonservices.ca', 'Canada'),
-    Marketplace('MX', 'A1AM78C64UM0Y8', 'https://mws.amazonservices.com.mx', 'Mexico'),
-    Marketplace('US', 'ATVPDKIKX0DER', 'https://mws.amazonservices.com', 'US'),
+    Marketplace(
+        'BR', 'BRL', 'A2Q3Y263D00KWC',
+        'https://mws.amazonservices.com', 'Amazon.com.br'),
+    Marketplace(
+        'CA', 'CAD', 'A2EUQ1WTGCTBG2',
+        'https://mws.amazonservices.ca', 'Amazon.ca'),
+    Marketplace(
+        'MX', 'MXN', 'A1AM78C64UM0Y8',
+        'https://mws.amazonservices.com.mx', 'Amazon.com.mx'),
+    Marketplace(
+        'US', 'USD', 'ATVPDKIKX0DER',
+        'https://mws.amazonservices.com', 'Amazon.com'),
 
     # Europe region
-    Marketplace('AE', 'A2VIGQ35RCS4UG', 'https://mws.amazonservices.ae', 'United Arab Emirates (U.A.E.)'),
-    Marketplace('DE', 'A1PA6795UKMFR9', 'https://mws-eu.amazonservices.com', 'Germany'),
-    Marketplace('EG', 'ARBP9OOSHTCHU', 'https://mws-eu.amazonservices.com', 'Egypt'),
-    Marketplace('ES', 'A1RKKUPIHCS9HS', 'https://mws-eu.amazonservices.com', 'Spain'),
-    Marketplace('FR', 'A13V1IB3VIYZZH', 'https://mws-eu.amazonservices.com', 'France'),
-    Marketplace('GB', 'A1F83G8C2ARO7P', 'https://mws-eu.amazonservices.com', 'UK'),
-    Marketplace('IN', 'A21TJRUUN4KGV', 'https://mws.amazonservices.in', 'India'),
-    Marketplace('IT', 'APJ6JRA9NG5V4', 'https://mws-eu.amazonservices.com', 'Italy'),
-    Marketplace('NL', 'A1805IZSGTT6HS', 'https://mws-eu.amazonservices.com', 'Netherlands'),
-    Marketplace('SA', 'A17E79C6D8DWNP', 'https://mws-eu.amazonservices.com', 'Saudi Arabia'),
-    Marketplace('TR', 'A33AVAJ2PDY3EV', 'https://mws-eu.amazonservices.com', 'Turkey'),
+    Marketplace(
+        'AE', 'AED', 'A2VIGQ35RCS4UG',
+        'https://mws.amazonservices.ae', 'United Arab Emirates (U.A.E.)'),
+    Marketplace(
+        'DE', 'EUR', 'A1PA6795UKMFR9',
+        'https://mws-eu.amazonservices.com', 'Amazon.de'),
+    Marketplace(
+        'EG', 'EGP', 'ARBP9OOSHTCHU',
+        'https://mws-eu.amazonservices.com', 'Egypt'),
+    Marketplace(
+        'ES', 'EUR', 'A1RKKUPIHCS9HS',
+        'https://mws-eu.amazonservices.com', 'Amazon.es'),
+    Marketplace(
+        'FR', 'EUR', 'A13V1IB3VIYZZH',
+        'https://mws-eu.amazonservices.com', 'Amazon.fr'),
+    Marketplace(
+        'GB', 'GBP', 'A1F83G8C2ARO7P',
+        'https://mws-eu.amazonservices.com', 'Amazon.co.uk'),
+    Marketplace(
+        'IN', 'INR', 'A21TJRUUN4KGV',
+        'https://mws.amazonservices.in', 'Amazon.in'),
+    Marketplace(
+        'IT', 'EUR', 'APJ6JRA9NG5V4',
+        'https://mws-eu.amazonservices.com', 'Amazon.it'),
+    Marketplace(
+        'NL', 'EUR', 'A1805IZSGTT6HS',
+        'https://mws-eu.amazonservices.com', 'Amazon.nl'),
+    Marketplace(
+        'SA', 'SAR', 'A17E79C6D8DWNP',
+        'https://mws-eu.amazonservices.com', 'Saudi Arabia'),
+    Marketplace(
+        'TR', 'EUR', 'A33AVAJ2PDY3EV',
+        'https://mws-eu.amazonservices.com', 'Turkey'),
 
     # Far East region
-    Marketplace('SG', 'A19VAU5U5O7RUS', 'https://mws-fe.amazonservices.com', 'Singapore'),
-    Marketplace('AU', 'A39IBJ37TRP1C6', 'https://mws.amazonservices.com.au', 'Australia'),
-    Marketplace('JP', 'A1VC38T7YXB528', 'https://mws.amazonservices.jp', 'Japan'),
+    Marketplace(
+        'SG', 'SGD', 'A19VAU5U5O7RUS',
+        'https://mws-fe.amazonservices.com', 'Amazon.sg'),
+    Marketplace(
+        'AU', 'AUD', 'A39IBJ37TRP1C6',
+        'https://mws.amazonservices.com.au', 'Amazon.com.au'),
+    Marketplace(
+        'JP', 'JPY', 'A1VC38T7YXB528',
+        'https://mws.amazonservices.jp', 'Amazon.jp'),
 
 ]
 
