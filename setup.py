@@ -14,7 +14,11 @@ requirements = [
     'Click>=7.0',
     'lxml',
     'requests',
+
+    # Drop these when py2 support is dropped
     'future',
+    'six',
+    'unicodecsv',
 ]
 
 setup_requirements = ['pytest-runner', ]

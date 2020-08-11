@@ -7,8 +7,7 @@ from datetime import datetime
 from click.testing import CliRunner
 
 from pymws import MWS, cli
-
-"""Tests for `pymws` package."""
+from pymws.utils import flatten_list
 
 
 def test_command_line_interface():
@@ -31,3 +30,22 @@ def test_query_string_builder():
     client = MWS('US')
     assert client.build_query_string(params) == \
         'City=Los%20%C3%81ngeles&Name=ST&Timestamp=2020-01-01T10%3A30%3A30'
+
+
+def test_list_flattening():
+    kwargs = {'ReportTypeList': ['_A_', '_B_']}
+    flatten_list(
+        kwargs,
+        'ReportTypeList',
+        'Type'
+    )
+    assert kwargs['ReportTypeList.Type.1'] == '_A_'
+    assert kwargs['ReportTypeList.Type.2'] == '_B_'
+
+    kwargs = {}
+    flatten_list(
+        kwargs,
+        'InexistentKey',
+        'Type'
+    )
+    assert not kwargs

@@ -13,7 +13,8 @@ from lxml import objectify
 from .exceptions import MWSError
 from .orders import Orders
 from .products import Products
-from .utils import get_marketplace
+from .reports import Reports
+from .utils import get_marketplace, parse_tsv
 
 try:
     from urllib.parse import urlparse, quote
@@ -55,6 +56,10 @@ class MWS(object):
     def orders(self):
         return Orders(self)
 
+    @property
+    def reports(self):
+        return Reports(self)
+
     def get(self, action, uri, req_params, version):
         return self._request(
             'GET',
@@ -86,14 +91,20 @@ class MWS(object):
             ),
             headers={'User-Agent': self.user_agent}
         )
-        xml = objectify.fromstring(response.content)
-        if response.status_code == 200:
+
+        if response.status_code != 200:
+            raise MWSError(response.text)
+
+        if response.headers['content-type'].startswith('text/xml'):
+            xml = objectify.fromstring(response.content)
             result_el = '{}Result'.format(action)
             if hasattr(xml, result_el):
                 return getattr(xml, result_el)
             return xml
+        elif response.headers['content-type'].startswith('text/plain'):
+            return parse_tsv(response.content.decode(encoding="iso-8859-1"))
         else:
-            raise MWSError(response.text)
+            return response.text
 
     def get_query_string(self, action, req_params, version):
         params = {

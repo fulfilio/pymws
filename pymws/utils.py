@@ -1,6 +1,15 @@
 from collections import namedtuple
 
+import six
+
 from .exceptions import MWSException
+
+if six.PY2:
+    import unicodecsv as csv
+    from io import BytesIO
+else:
+    import csv
+
 
 Marketplace = namedtuple('Marketplace', ['code', 'id', 'endpoint'])
 
@@ -35,4 +44,35 @@ def get_marketplace(id_or_code):
 
     raise MWSException(
         '{} is not a valid marketplace id or code'.format(id_or_code)
+    )
+
+
+def flatten_list(kwargs, key, separator):
+    """
+    Convert a list into URL parameters the way amazon like it.
+
+    Example:
+
+    flatten_list({'ReportTypeList': ['_A_', '_B_']}, 'ReportTypeList', 'Type')
+
+    Becomes:
+
+    ReportTypeList.Type.1=_A_&ReportTypeList.Type.2=_B_
+    """
+    vals = kwargs.pop(key, [])
+    for index, value in enumerate(vals, 1):
+        kwargs['{}.{}.{}'.format(key, separator, index)] = value
+
+
+def parse_tsv(text):
+    """
+    Python 2 and 3 compatible TSV parser that returns a list of
+    dictionary objects.
+    """
+    if six.PY2:
+        text = BytesIO(text.encode('utf-8'))
+    else:
+        text = text.splitlines()
+    return list(
+        csv.DictReader(text, dialect='excel-tab')
     )
