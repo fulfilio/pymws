@@ -6,13 +6,12 @@ Python MWS Client
 .. image:: https://img.shields.io/pypi/v/pymws.svg
         :target: https://pypi.python.org/pypi/pymws
 
-.. image:: https://img.shields.io/travis/fulfilio/pymws.svg
-        :target: https://travis-ci.com/fulfilio/pymws
+.. image:: https://github.com/fulfilio/pymws/workflows/CI%20(pip)/badge.svg
+        :target: https://github.com/fulfilio/pymws/actions
 
 .. image:: https://readthedocs.org/projects/pymws/badge/?version=latest
         :target: https://pymws.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
-
 
 .. image:: https://pyup.io/repos/github/fulfilio/pymws/shield.svg
      :target: https://pyup.io/repos/github/fulfilio/pymws/
