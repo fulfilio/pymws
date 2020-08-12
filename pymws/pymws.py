@@ -89,6 +89,11 @@ class MWS(object):
 
     @property
     def fulfillment_outbound_shipment(self):
+        """
+        Fetch the Fulfillment outbound shipment API client
+        Returns an instance of
+        :class:`pymws.fulfillment.outbound_shipment.OutboundShipment`
+        """
         return OutboundShipment(self)
 
     def get(self, action, uri, req_params, version):

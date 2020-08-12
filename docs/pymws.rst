@@ -19,6 +19,11 @@ product
 .. automodule:: pymws.products
     :members:
 
+fulfillment
+---------------------
+
+.. automodule:: pymws.fulfillment.outbound_shipment
+    :members:
 
 reports
 --------------------

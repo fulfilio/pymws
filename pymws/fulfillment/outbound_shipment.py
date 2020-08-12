@@ -24,6 +24,7 @@ class OutboundShipment(object):
                 'Quantity': 1,
             }],
         )
+
     for other attributes refer to the Amazon MWS documentation.
     """
     VERSION = "2010-10-01"
@@ -37,7 +38,7 @@ class OutboundShipment(object):
         Requests that Amazon ship items from the seller's inventory in Amazon's
         fulfillment network to a destination address.
 
-        Learn more: http://docs.developer.amazonservices.com/en_US/fba_outbound/FBAOutbound_CreateFulfillmentOrder.html
+        `Learn more <http://docs.developer.amazonservices.com/en_US/fba_outbound/FBAOutbound_CreateFulfillmentOrder.html>`__
         """  # noqa: E501
         return self.client.post(
             'CreateFulfillmentOrder', self.URI, kwargs, self.VERSION
@@ -47,7 +48,7 @@ class OutboundShipment(object):
         """
         Returns a fulfillment order based on a specified SellerFulfillmentOrderId.
 
-        Learn more: http://docs.developer.amazonservices.com/en_US/fba_outbound/FBAOutbound_GetFulfillmentOrder.html
+        `Learn more <Learn more: http://docs.developer.amazonservices.com/en_US/fba_outbound/FBAOutbound_GetFulfillmentOrder.html>`__
         """  # noqa: E501
         return self.client.get(
             'GetFulfillmentOrder', self.URI,
