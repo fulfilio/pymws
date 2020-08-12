@@ -15,8 +15,8 @@ Marketplace = namedtuple(
     'Marketplace', ['code', 'currency', 'id', 'endpoint', 'name']
 )
 
-# Updated from
-# http://docs.developer.amazonservices.com/en_US/dev_guide/DG_Endpoints.html
+#: A list of `Marketplaces
+#: <http://docs.developer.amazonservices.com/en_US/dev_guide/DG_Endpoints.html>`_
 MARKETPLACES = [
 
     # North america region
@@ -102,13 +102,17 @@ def flatten_list(kwargs, key, separator):
     """
     Convert a list into URL parameters the way amazon like it.
 
-    Example:
+    Example::
 
-    flatten_list({'ReportTypeList': ['_A_', '_B_']}, 'ReportTypeList', 'Type')
+        flatten_list(
+            {'ReportTypeList': ['_A_', '_B_']},
+            'ReportTypeList',
+            'Type'
+        )
 
-    Becomes:
+    Becomes::
 
-    ReportTypeList.Type.1=_A_&ReportTypeList.Type.2=_B_
+        ReportTypeList.Type.1=_A_&ReportTypeList.Type.2=_B_
     """
     vals = kwargs.pop(key, [])
     for index, value in enumerate(vals, 1):

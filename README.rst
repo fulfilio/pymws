@@ -37,7 +37,9 @@ Usage
 
 Import the package
 
-`from pymws import MWS`
+.. code-block:: python
+
+    from pymws import MWS
 
 Create a client instance
 

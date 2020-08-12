@@ -30,9 +30,23 @@ MWS_SAFE = '-_.~'.encode('utf-8')
 class MWS(object):
     """
     Primary client class that acts as a gateway to all of the
-    functionality offered by this package
+    functionality offered by this package.
 
-    :param marketplace: marketplace to connect to
+    Example usage::
+
+        client = MWS(
+            marketplace="US", merchant_id="1234",
+            access_key_id="key", secret_key="secret",
+            auth_token="token"
+        )
+        client.reports.get_reports_list()
+
+    :param marketplace: marketplace to connect to.
+    :param merchant_id: Amazon merchant it.
+    :param access_key_id: Access key of your app
+    :param secret_key: Secret key of your app
+    :param auth_token: Token obtained by the merchant after
+                       installing your app.
     """
 
     def __init__(
@@ -50,14 +64,26 @@ class MWS(object):
 
     @property
     def products(self):
+        """
+        Fetch the products API client.
+        Returns an instance of :class:`pymws.products.Products`
+        """
         return Products(self)
 
     @property
     def orders(self):
+        """
+        Fetch the order API client
+        Returns an instance of :class:`pymws.orders.Orders`
+        """
         return Orders(self)
 
     @property
     def reports(self):
+        """
+        Fetch the reports API client
+        Returns an instance of :class:`pymws.reports.Reports`
+        """
         return Reports(self)
 
     def get(self, action, uri, req_params, version):

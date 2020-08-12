@@ -29,7 +29,7 @@ class Orders(object):
         """
         Returns orders created or updated during a time frame that you specify.
 
-        Learn more: http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrders.html
+        `Learn more <http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrders.html>`__
         """     # noqa: E501
         if 'MarketplaceId.Id.1' not in kwargs:
             # Not a single marketplace id is specified.
@@ -44,7 +44,7 @@ class Orders(object):
         """
         Returns the next page of orders using the NextToken parameter.
 
-        http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrdersByNextToken.html
+        `Learn more <http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrdersByNextToken.html>`__
 
         The `NextToken` argument is not very pythonic, but keeps the
         package user side code consistent with Amazon's documentation
@@ -59,7 +59,7 @@ class Orders(object):
         """
         Returns orders based on the AmazonOrderId values that you specify.
 
-        http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_GetOrder.html
+        `Learn more <http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_GetOrder.html>`__
         """     # noqa: E501
         return self.client.get(
             'GetOrder', self.URI,
@@ -70,7 +70,7 @@ class Orders(object):
         """
         Returns order items based on the AmazonOrderId that you specify.
 
-        http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrderItems.html
+        `Learn more <http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrderItems.html>`__
         """     # noqa: E501
         return self.client.get(
             'ListOrderItems', self.URI,
@@ -81,7 +81,7 @@ class Orders(object):
         """
         Returns the next page of order items using the NextToken parameter.
 
-        http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrderItemsByNextToken.html
+        `Learn more <http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_ListOrderItemsByNextToken.html>`__
         """     # noqa: E501
         return self.client.get(
             'ListOrderItemsByNextToken', self.URI,
@@ -92,7 +92,7 @@ class Orders(object):
         """
         Returns the operational status of the Orders API section.
 
-        http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/MWS_GetServiceStatus.html
+        `Learn more <http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/MWS_GetServiceStatus.html>`__
         """     # noqa: E501
         return self.client.get(
             'GetServiceStatus', self.URI,

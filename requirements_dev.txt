@@ -11,3 +11,6 @@ pytest==4.6.5
 pytest-runner==5.1
 pytest-cov
 requests_mock
+
+
+-e .

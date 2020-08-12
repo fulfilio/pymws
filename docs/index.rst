@@ -1,5 +1,5 @@
 Welcome to Python MWS Client's documentation!
-======================================
+==============================================
 
 .. toctree::
    :maxdepth: 2
@@ -8,7 +8,7 @@ Welcome to Python MWS Client's documentation!
    readme
    installation
    usage
-   modules
+   pymws
    contributing
    authors
    history
