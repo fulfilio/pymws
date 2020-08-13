@@ -34,9 +34,19 @@ def test_create_fulfillment_order(mws_client, mock_adapter, example_response):
             'SellerSKU': 'SKU-1',
             'SellerFulfillmentOrderItemId': 'SO3421-1',
             'Quantity': 1,
+        }, {
+            'SellerSKU': 'SKU-2',
+            'SellerFulfillmentOrderItemId': 'SO3421-2',
+            'Quantity': 10.0,
         }],
     )
     assert response.ResponseMetadata.RequestId
+    url = mock_adapter.request_history[0].url
+    assert 'DestinationAddress.Name=Ren%C3%A9%20Magritte' in url
+    assert 'Items.member.1.SellerSKU=SKU-1' in url
+    assert 'Items.member.1.Quantity=1' in url
+    assert 'Items.member.2.SellerSKU=SKU-2' in url
+    assert 'Items.member.2.Quantity=10.0' in url
 
 
 def test_get_fulfillment_order(mws_client, mock_adapter, example_response):

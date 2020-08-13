@@ -1,3 +1,6 @@
+from ..utils import flatten_list, flatten_dict
+
+
 class OutboundShipment(object):
     """
     Implements outbound shipment client for Amazon MWS
@@ -40,6 +43,9 @@ class OutboundShipment(object):
 
         `Learn more <http://docs.developer.amazonservices.com/en_US/fba_outbound/FBAOutbound_CreateFulfillmentOrder.html>`__
         """  # noqa: E501
+        flatten_dict(kwargs, 'DestinationAddress')
+        flatten_list(kwargs, 'Items', 'member')
+        flatten_list(kwargs, 'NotificationEmailList', 'member')
         return self.client.post(
             'CreateFulfillmentOrder', self.URI, kwargs, self.VERSION
         )

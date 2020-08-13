@@ -116,7 +116,30 @@ def flatten_list(kwargs, key, separator):
     """
     vals = kwargs.pop(key, [])
     for index, value in enumerate(vals, 1):
-        kwargs['{}.{}.{}'.format(key, separator, index)] = value
+        subkey = '{}.{}.{}'.format(key, separator, index)
+        kwargs[subkey] = value
+        if isinstance(value, dict):
+            flatten_dict(kwargs, subkey)
+
+
+def flatten_dict(kwargs, key):
+    """
+    Convert a dict into URL parameters the way amazon like it.
+
+    Example::
+
+        flatten_dict(
+            {'DestinationAddress': {'Name': 'John', 'Country': 'US'}},
+            'DestinationAddress',
+        )
+
+    Becomes::
+
+        DestinationAddress.Name=John&DestinationAddress.Country=US
+    """
+    vals = kwargs.pop(key, {})
+    for subkey, value in vals.items():
+        kwargs['{}.{}'.format(key, subkey)] = value
 
 
 def parse_tsv(text):
