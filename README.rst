@@ -26,10 +26,12 @@ Python client for Amazon Marketplace Web Services (MWS)
 * Documentation: https://pymws.readthedocs.io.
 
 
-Features
+Installation
 --------
 
-* TODO
+.. code-block::
+
+    pip install pymws
 
 Usage
 -----
