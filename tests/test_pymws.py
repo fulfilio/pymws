@@ -9,7 +9,7 @@ import pytest
 
 from pymws import MWS, cli
 from pymws.exceptions import AccessDenied
-from pymws.utils import flatten_list
+from pymws.utils import flatten_list, flatten_dict
 
 
 def test_command_line_interface():
@@ -49,6 +49,30 @@ def test_list_flattening():
         kwargs,
         'InexistentKey',
         'Type'
+    )
+    assert not kwargs
+
+
+def test_dict_flattening():
+    kwargs = {
+        'DestinationAddress': {
+            'Name': 'John Doe',
+            'Line1': 'Random street',
+            'StateOrProvinceCode': 'CA',
+            'CountryCode': 'US',
+        }
+    }
+    flatten_dict(
+        kwargs,
+        'DestinationAddress',
+    )
+    assert kwargs['DestinationAddress.Name'] == 'John Doe'
+    assert kwargs['DestinationAddress.CountryCode'] == 'US'
+
+    kwargs = {}
+    flatten_dict(
+        kwargs,
+        'DestinationAddress',
     )
     assert not kwargs
 
