@@ -27,7 +27,7 @@ Python client for Amazon Marketplace Web Services (MWS)
 
 
 Installation
---------
+------------
 
 .. code-block::
 
