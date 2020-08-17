@@ -8,7 +8,7 @@ Sphinx==3.2.1
 twine==3.2.0
 Click==7.1.2
 pytest==6.0.1
-pytest-runner==5.1
+pytest-runner==5.2
 pytest-cov
 requests_mock
 
