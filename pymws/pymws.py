@@ -10,7 +10,7 @@ from datetime import date, datetime
 import requests
 from lxml import objectify
 
-from .exceptions import MWSError, AccessDenied
+from .exceptions import MWSError, AccessDenied, QuotaExceeded, RequestThrottled
 from .orders import Orders
 from .products import Products
 from .reports import Reports
@@ -130,6 +130,12 @@ class MWS(object):
 
         if response.status_code == 401:
             raise AccessDenied(response.text)
+        elif response.status_code == 503:
+            error_code = objectify.fromstring(response.text).Error.Code
+            if error_code == 'RequestThrottled':
+                raise RequestThrottled(response.text)
+            elif error_code == 'QuotaExceeded':
+                raise QuotaExceeded(response.text)
         elif response.status_code != 200:
             raise MWSError(response.text)
 
