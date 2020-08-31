@@ -1,0 +1,29 @@
+<AmazonEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd">
+  <Header>
+    <DocumentVersion>1.02</DocumentVersion>
+    <MerchantIdentifier>MERCHANT_ID</MerchantIdentifier>
+  </Header>
+  <MessageType>ProcessingReport</MessageType>
+  <Message>
+    <MessageID>1</MessageID>
+    <ProcessingReport>
+      <DocumentTransactionID>4901340</DocumentTransactionID>
+      <StatusCode>Complete</StatusCode>
+      <ProcessingSummary>
+        <MessagesProcessed>1</MessagesProcessed>
+        <MessagesSuccessful>0</MessagesSuccessful>
+        <MessagesWithError>1</MessagesWithError>
+        <MessagesWithWarning>0</MessagesWithWarning>
+      </ProcessingSummary>
+      <Result>
+        <MessageID>123456</MessageID>
+        <ResultCode>Error</ResultCode>
+        <ResultMessageCode>18028</ResultMessageCode>
+        <ResultDescription>The data you submitted is incomplete or invalid. For help fixing this, see http://sellercentral.amazon.com/gp/help/30721</ResultDescription>
+        <AdditionalInfo>
+          <AmazonOrderID>113-123456-123456</AmazonOrderID>
+        </AdditionalInfo>
+      </Result>
+    </ProcessingReport>
+  </Message>
+</AmazonEnvelope>

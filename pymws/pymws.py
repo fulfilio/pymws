@@ -11,11 +11,12 @@ import requests
 from lxml import objectify
 
 from .exceptions import MWSError, AccessDenied, QuotaExceeded, RequestThrottled
+from .feeds import Feeds
 from .orders import Orders
 from .products import Products
 from .reports import Reports
 from .fulfillment.outbound_shipment import OutboundShipment
-from .utils import get_marketplace, parse_tsv
+from .utils import get_marketplace, parse_tsv, get_md5_hash
 
 try:
     from urllib.parse import urlparse, quote
@@ -88,6 +89,14 @@ class MWS(object):
         return Reports(self)
 
     @property
+    def feeds(self):
+        """
+        Fetch the feeds API client
+        Returns an instance of :class:`pymws.feeds.Feeds`
+        """
+        return Feeds(self)
+
+    @property
     def fulfillment_outbound_shipment(self):
         """
         Fetch the Fulfillment outbound shipment API client
@@ -102,30 +111,43 @@ class MWS(object):
             action, uri, req_params, version
         )
 
-    def post(self, action, uri, req_params, version):
+    def post(self, action, uri, req_params, version,
+             body=None, content_type=None):
         return self._request(
             'POST',
-            action, uri, req_params, version
+            action, uri, req_params, version, body, content_type
         )
 
-    def _request(self, http_verb, action, uri, req_params, version):
+    def _request(self, http_verb, action, uri, req_params, version,
+                 body=None, content_type=None):
         """
         Build a request, parse the response and handle errors
         """
+        if body is not None:
+            req_params['ContentMD5Value'] = get_md5_hash(body)
+
         query_string = self.get_query_string(action, req_params, version)
         signature = self.get_signature(http_verb, uri, query_string)
         url = "{endpoint}{uri}".format(
             endpoint=self.marketplace.endpoint,
             uri=uri,
         )
+        headers = {
+            'User-Agent': self.user_agent,
+        }
+
+        if content_type:
+            headers['Content-Type'] = content_type
+
         response = self.session.request(
             http_verb,
             url,
+            data=body,
             params="{query_string}&Signature={signature}".format(
                 query_string=query_string,
                 signature=quote(signature)
             ),
-            headers={'User-Agent': self.user_agent}
+            headers=headers
         )
 
         if response.status_code == 401:
