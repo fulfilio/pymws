@@ -1,5 +1,8 @@
+import base64
 from collections import namedtuple
+import hashlib
 
+from builtins import str
 import six
 
 from .exceptions import MWSException
@@ -154,3 +157,14 @@ def parse_tsv(text):
     return list(
         csv.DictReader(text, dialect='excel-tab')
     )
+
+
+def get_md5_hash(string):
+    hasher = hashlib.md5()
+    if isinstance(string, str):
+        hasher.update(string.encode('utf-8'))
+    else:
+        hasher.update(string)
+    return base64.b64encode(
+        hasher.digest()
+    ).decode('utf-8')
