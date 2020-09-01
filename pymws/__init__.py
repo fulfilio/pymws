@@ -2,7 +2,7 @@
 
 __author__ = """Fulfil.IO Inc."""
 __email__ = 'help@fulfil.io'
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 
 from .pymws import MWS              # noqa
 from .exceptions import MWSError    # noqa
