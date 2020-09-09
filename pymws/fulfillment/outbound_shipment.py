@@ -44,6 +44,8 @@ class OutboundShipment(object):
         `Learn more <http://docs.developer.amazonservices.com/en_US/fba_outbound/FBAOutbound_CreateFulfillmentOrder.html>`__
         """  # noqa: E501
         flatten_dict(kwargs, 'DestinationAddress')
+        for item in kwargs.get('Items'):
+            flatten_dict(item, 'PerUnitDeclaredValue')
         flatten_list(kwargs, 'Items', 'member')
         flatten_list(kwargs, 'NotificationEmailList', 'member')
         return self.client.post(

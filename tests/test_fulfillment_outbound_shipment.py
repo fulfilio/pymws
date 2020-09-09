@@ -38,6 +38,10 @@ def test_create_fulfillment_order(mws_client, mock_adapter, example_response):
             'SellerSKU': 'SKU-2',
             'SellerFulfillmentOrderItemId': 'SO3421-2',
             'Quantity': 10.0,
+            'PerUnitDeclaredValue': {
+                'CurrencyCode': 'USD',
+                'Value': "32",
+            }
         }],
     )
     assert response.ResponseMetadata.RequestId
@@ -47,6 +51,8 @@ def test_create_fulfillment_order(mws_client, mock_adapter, example_response):
     assert 'Items.member.1.Quantity=1' in url
     assert 'Items.member.2.SellerSKU=SKU-2' in url
     assert 'Items.member.2.Quantity=10.0' in url
+    assert 'Items.member.2.PerUnitDeclaredValue.CurrencyCode=USD' in url
+    assert 'Items.member.2.PerUnitDeclaredValue.Value=32' in url
 
 
 def test_get_fulfillment_order(mws_client, mock_adapter, example_response):
