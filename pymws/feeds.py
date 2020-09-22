@@ -1,3 +1,6 @@
+from .utils import flatten_list
+
+
 class Feeds(object):
     """
     The Amazon MWS Feeds API section of the Amazon Marketplace
@@ -54,6 +57,8 @@ class Feeds(object):
 
         `Learn more <https://docs.developer.amazonservices.com/en_US/feeds/Feeds_GetFeedSubmissionList.html>`_
         """    # noqa: E501
+        flatten_list(kwargs, 'FeedSubmissionIdList', 'Id')
+        flatten_list(kwargs, 'FeedTypeList', 'Type')
         return self.client.get(
             'GetFeedSubmissionList', self.URI, kwargs, self.VERSION
         )
