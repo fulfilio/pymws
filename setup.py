@@ -21,10 +21,6 @@ requirements = [
     'unicodecsv',
 ]
 
-setup_requirements = ['pytest-runner', ]
-
-test_requirements = ['pytest>=3', ]
-
 setup(
     author="Fulfil.IO Inc.",
     author_email='help@fulfil.io',
@@ -54,9 +50,7 @@ setup(
     keywords='pymws',
     name='pymws',
     packages=find_packages(include=['pymws', 'pymws.*']),
-    setup_requires=setup_requirements,
     test_suite='tests',
-    tests_require=test_requirements,
     url='https://github.com/fulfilio/pymws',
     version='0.1.6',
     zip_safe=False,

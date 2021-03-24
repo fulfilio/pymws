@@ -16,6 +16,7 @@ from .orders import Orders
 from .products import Products
 from .reports import Reports
 from .fulfillment.outbound_shipment import OutboundShipment
+from .fulfillment.inbound_shipment import InboundShipment
 from .utils import get_marketplace, parse_tsv, get_md5_hash
 
 try:
@@ -104,6 +105,15 @@ class MWS(object):
         :class:`pymws.fulfillment.outbound_shipment.OutboundShipment`
         """
         return OutboundShipment(self)
+
+    @property
+    def fulfillment_inbound_shipment(self):
+        """
+        Fetch the Fulfillment inbound shipment API client
+        Returns an instance of
+        :class:`pymws.fulfillment.inbound_shipment.InboundShipment`
+        """
+        return InboundShipment(self)
 
     def get(self, action, uri, req_params, version):
         return self._request(
