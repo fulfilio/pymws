@@ -1,0 +1,3 @@
+<ListInboundShipmentsByNextTokenResult xmlns="http://mws.amazonaws.com/FulfillmentInboundShipment/2010-10-01/">
+    <ShipmentData />
+</ListInboundShipmentsByNextTokenResult>
