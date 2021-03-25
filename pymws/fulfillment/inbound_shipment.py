@@ -19,6 +19,28 @@ class InboundShipment(object):
             "ListInboundShipments", self.URI, kwargs, self.VERSION
         )
 
+    def list_all_inbound_shipments(self, **kwargs):
+        "Gets all the inboud shipments using next token"
+        if "NextToken" in kwargs:
+            response = self.list_inbound_shipments_by_next_token(
+                kwargs["NextToken"]
+            )
+        else:
+            response = self.list_inbound_shipments(**kwargs)
+
+        if not hasattr(response.ShipmentData, "member"):
+            # No shipments
+            return []
+
+        shipments = list(response.ShipmentData.member)
+
+        next_token = getattr(response, "NextToken")
+        if next_token:
+            shipments.extend(
+                self.list_all_inbound_shipments(NextToken=str(next_token))
+            )
+        return shipments
+
     def list_inbound_shipments_by_next_token(self, NextToken):
         """
         Returns the next page of inbound shipments using the NextToken parameter.
@@ -44,6 +66,30 @@ class InboundShipment(object):
             "ListInboundShipmentItems", self.URI,
             {"ShipmentId": ShipmentId}, self.VERSION
         )
+
+    def list_all_inbound_shipment_items(self, ShipmentId, NextToken=None):
+        "Gets all the inboud shipment items using next token"
+        if NextToken:
+            response = self.list_inbound_shipment_items_by_next_token(
+                NextToken
+            )
+        else:
+            response = self.list_inbound_shipment_items(ShipmentId)
+
+        if not hasattr(response.ItemData, "member"):
+            # No items
+            return []
+
+        items = list(response.ItemData.member)
+
+        next_token = getattr(response, "NextToken")
+        if next_token:
+            items.extend(
+                self.list_all_inbound_shipment_items(
+                    ShipmentId, NextToken=str(next_token)
+                )
+            )
+        return items
 
     def list_inbound_shipment_items_by_next_token(self, NextToken):
         """
