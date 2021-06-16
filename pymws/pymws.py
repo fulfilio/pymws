@@ -17,7 +17,7 @@ from .products import Products
 from .reports import Reports
 from .fulfillment.outbound_shipment import OutboundShipment
 from .fulfillment.inbound_shipment import InboundShipment
-from .utils import get_marketplace, parse_tsv, get_md5_hash
+from .utils import get_marketplace, parse_xsv, get_md5_hash
 
 try:
     from urllib.parse import urlparse, quote
@@ -178,7 +178,7 @@ class MWS(object):
                 return getattr(xml, result_el)
             return xml
         elif response.headers['content-type'].startswith('text/plain'):
-            return parse_tsv(response.content.decode(encoding="iso-8859-1"))
+            return parse_xsv(response.content.decode(encoding="iso-8859-1"))
         else:
             return response.text
 
