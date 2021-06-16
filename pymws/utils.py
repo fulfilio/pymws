@@ -145,17 +145,24 @@ def flatten_dict(kwargs, key):
         kwargs['{}.{}'.format(key, subkey)] = value
 
 
-def parse_tsv(text):
+def parse_xsv(text):
     """
-    Python 2 and 3 compatible TSV parser that returns a list of
+    Python 2 and 3 compatible (X)SV - CSV/TSV parser that returns a list of
     dictionary objects.
     """
+    dialect = csv.Sniffer().sniff(text)
     if six.PY2:
         text = BytesIO(text.encode('utf-8'))
     else:
         text = text.splitlines()
+
     return list(
-        csv.DictReader(text, dialect='excel-tab')
+        csv.DictReader(
+            text,
+            delimiter=(
+                dialect.delimiter.encode() if six.PY2 else dialect.delimiter
+            )
+        )
     )
 
 

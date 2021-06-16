@@ -76,3 +76,19 @@ def test_get_report_tsv(
     response = mws_client.reports.get_report(123456789)
     assert len(response) == 3
     assert response[0]['listing-id'] == '0305XXNBYUQ'
+
+
+def test_get_report_csv(
+        mws_client, mock_adapter, example_response):
+    mock_adapter.register_uri(
+        'GET',
+        mws_client.marketplace.endpoint + '/Reports/2009-01-01',
+        status_code=200,
+        text=example_response(
+            'reports/get_report_comma_separated.csv'
+        ),
+        headers={'Content-Type': 'text/plain;charset=Cp1252'}
+    )
+    response = mws_client.reports.get_report(123456789)
+    assert len(response) == 2
+    assert response[0]['sku'] == 'test-1'
