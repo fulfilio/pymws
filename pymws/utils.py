@@ -2,6 +2,7 @@ import base64
 from collections import namedtuple
 import hashlib
 
+from io import BytesIO
 from builtins import str
 import six
 
@@ -9,7 +10,6 @@ from .exceptions import MWSException
 
 if six.PY2:
     import unicodecsv as csv
-    from io import BytesIO
 else:
     import csv
 
@@ -150,7 +150,8 @@ def parse_xsv(text):
     Python 2 and 3 compatible (X)SV - CSV/TSV parser that returns a list of
     dictionary objects.
     """
-    dialect = csv.Sniffer().sniff(text)
+    header = BytesIO(text.encode("utf-8")).readline().decode("utf-8")
+    dialect = csv.Sniffer().sniff(header)
     if six.PY2:
         text = BytesIO(text.encode('utf-8'))
     else:
