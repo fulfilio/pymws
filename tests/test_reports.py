@@ -10,9 +10,9 @@ def test_request_report(mws_client, mock_adapter, example_response):
         headers={'Content-Type': 'text/xml'}
     )
     response = mws_client.reports.request_report(
-        Marketplace='ATVPDKIKX0DER',
         ReportType='_GET_MERCHANT_LISTINGS_DATA_',
-        StartDate=datetime(2009, 1, 3, 18, 12, 21)
+        StartDate=datetime(2009, 1, 3, 18, 12, 21),
+        MarketplaceIdList=['ATVPDKIKX0DER'],
     )
     assert response.ReportRequestInfo.ReportProcessingStatus == '_SUBMITTED_'
 
@@ -26,7 +26,6 @@ def test_report_request_list(mws_client, mock_adapter, example_response):
         headers={'Content-Type': 'text/xml'}
     )
     response = mws_client.reports.get_report_request_list(
-        Marketplace='ATVPDKIKX0DER',
         ReportTypeList=[
             '_GET_ORDERS_DATA_',
             '_GET_MERCHANT_LISTINGS_DATA_',
@@ -34,7 +33,8 @@ def test_report_request_list(mws_client, mock_adapter, example_response):
         ReportProcessingStatusList=[
             '_DONE_',
         ],
-        ReportRequestIdList=['2291326454']
+        ReportRequestIdList=['2291326454'],
+        MarketplaceIdList=['ATVPDKIKX0DER'],
     )
 
     assert 'ReportTypeList.Type.1=_GET_ORDERS_DATA_' in \
