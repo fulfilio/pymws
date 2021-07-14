@@ -63,7 +63,7 @@ class Orders(object):
         """     # noqa: E501
         return self.client.get(
             'GetOrder', self.URI,
-            {'AmazonOrderId': AmazonOrderId}, self.VERSION
+            {'AmazonOrderId.Id.1': AmazonOrderId}, self.VERSION
         )
 
     def list_order_items(self, AmazonOrderId):
