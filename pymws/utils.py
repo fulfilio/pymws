@@ -5,6 +5,7 @@ import hashlib
 from io import BytesIO
 from builtins import str
 import six
+import re
 
 from .exceptions import MWSException
 
@@ -176,3 +177,14 @@ def get_md5_hash(string):
     return base64.b64encode(
         hasher.digest()
     ).decode('utf-8')
+
+
+def remove_xml_namespaces(data):
+    """Return namespaces found in the XML `data`, in either str or bytes format."""
+    pattern = r'xmlns(:ns2)?="[^"]+"|(ns2:)|(xml:)'
+    replacement = ""
+    if not isinstance(data, str):
+        # Encode the pattern and substitute to use them on bytes data.
+        pattern = pattern.encode()
+        replacement = replacement.encode()
+    return re.sub(pattern, replacement, data)

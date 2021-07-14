@@ -17,7 +17,9 @@ from .products import Products
 from .reports import Reports
 from .fulfillment.outbound_shipment import OutboundShipment
 from .fulfillment.inbound_shipment import InboundShipment
-from .utils import get_marketplace, parse_xsv, get_md5_hash
+from .utils import (
+    get_marketplace, parse_xsv, get_md5_hash, remove_xml_namespaces
+)
 
 try:
     from urllib.parse import urlparse, quote
@@ -172,7 +174,7 @@ class MWS(object):
             raise MWSError(response.text)
 
         if response.headers['content-type'].startswith('text/xml'):
-            xml = objectify.fromstring(response.content)
+            xml = objectify.fromstring(remove_xml_namespaces(response.content))
             result_el = '{}Result'.format(action)
             if hasattr(xml, result_el):
                 return getattr(xml, result_el)
