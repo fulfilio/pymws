@@ -26,6 +26,7 @@ class Reports(object):
 
         `Learn more <Read more: http://docs.developer.amazonservices.com/en_US/reports/Reports_RequestReport.html>`__
         """   # noqa: E501
+        flatten_list(kwargs, 'MarketplaceIdList', 'Id')
         return self.client.post(
             'RequestReport', self.URI, kwargs, self.VERSION
         )
@@ -87,6 +88,7 @@ class Reports(object):
         """   # noqa: E501
         flatten_list(kwargs, 'ReportTypeList', 'Type')
         flatten_list(kwargs, 'ReportRequestIdList', 'Id')
+        flatten_list(kwargs, 'MarketplaceIdList', 'Id')
         return self.client.get(
             'GetReportList', self.URI, kwargs, self.VERSION
         )
