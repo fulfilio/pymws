@@ -155,7 +155,7 @@ def parse_xsv(text):
     if six.PY2:
         text = BytesIO(text.encode('utf-8'))
     else:
-        text = text.splitlines()
+        text = text.split("\n")
 
     return list(
         csv.DictReader(
