@@ -1,3 +1,6 @@
+from .utils import flatten_list
+
+
 class Orders(object):
     """
     Implements an order API client for Amazon MWS
@@ -36,6 +39,7 @@ class Orders(object):
             # fallback to the default marketplace
             kwargs['MarketplaceId.Id.1'] = self.client.marketplace.id
 
+        flatten_list(kwargs, 'FulfillmentChannel', 'Channel')
         return self.client.get(
             'ListOrders', self.URI, kwargs, self.VERSION
         )
