@@ -151,7 +151,8 @@ def parse_xsv(text):
     return list(
         csv.DictReader(
             text.split("\n"),
-            delimiter=dialect.delimiter
+            delimiter=dialect.delimiter,
+            quotechar='•',
         )
     )
 
