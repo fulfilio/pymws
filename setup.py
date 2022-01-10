@@ -14,17 +14,12 @@ requirements = [
     'Click>=7.0',
     'lxml',
     'requests',
-
-    # Drop these when py2 support is dropped
-    'future',
-    'six',
-    'unicodecsv',
 ]
 
 setup(
     author="Fulfil.IO Inc.",
     author_email='help@fulfil.io',
-    python_requires='>=2.7',
+    python_requires='>=3.5',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -35,7 +30,6 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 2.7',
     ],
     description="Python client for Amazon Marketplace Web Services (MWS)",
     entry_points={

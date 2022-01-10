@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
-
 def test_list_inbound_shipments(mws_client, mock_adapter, example_response):
     mock_adapter.register_uri(
         "GET",

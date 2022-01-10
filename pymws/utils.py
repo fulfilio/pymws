@@ -1,17 +1,12 @@
+import csv
 import base64
 from collections import namedtuple
 import hashlib
 
 from io import BytesIO
 from builtins import str
-import six
 
 from .exceptions import MWSException
-
-if six.PY2:
-    import unicodecsv as csv
-else:
-    import csv
 
 
 Marketplace = namedtuple(
@@ -152,17 +147,11 @@ def parse_xsv(text):
     """
     header = BytesIO(text.encode("utf-8")).readline().decode("utf-8")
     dialect = csv.Sniffer().sniff(header)
-    if six.PY2:
-        text = BytesIO(text.encode('utf-8'))
-    else:
-        text = text.split("\n")
 
     return list(
         csv.DictReader(
-            text,
-            delimiter=(
-                dialect.delimiter.encode() if six.PY2 else dialect.delimiter
-            )
+            text.split("\n"),
+            delimiter=dialect.delimiter
         )
     )
 
