@@ -46,6 +46,6 @@ setup(
     packages=find_packages(include=['pymws', 'pymws.*']),
     test_suite='tests',
     url='https://github.com/fulfilio/pymws',
-    version='0.1.13',
+    version='0.2.0',
     zip_safe=False,
 )
